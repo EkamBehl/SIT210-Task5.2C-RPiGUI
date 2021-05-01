@@ -1,0 +1,51 @@
+from Tkinter import *
+import tkFont
+from gpiozero import LED
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BOARD)
+
+win=Tk()
+GPIO.setup(8,GPIO.OUT)
+GPIO.setup(10,GPIO.OUT)
+GPIO.setup(11,GPIO.OUT)
+
+win.title("TASK 5.2")
+myFont=tkFont.Font(family='Helvetica',size=13,weight="bold")
+
+def ledToggle():
+    if GPIO.input(8):
+        GPIO.output(8,GPIO.LOW)
+        led1Button["text"]="Turn LED On"
+    else:
+        GPIO.output(8,GPIO.HIGH)
+        led1Button["text"]="Turn LED Off"
+def led2Toggle():
+    if GPIO.input(10):
+        GPIO.output(10,GPIO.LOW)
+        led2Button["text"]="Turn LED On"
+    else:
+        GPIO.output(10,GPIO.HIGH)
+        led2Button["text"]="Turn LED Off"
+def led3Toggle():
+    if GPIO.input(11):
+        GPIO.output(11,GPIO.LOW)
+        led3Button["text"]="Turn LED On"
+    else:
+        
+        GPIO.output(11,GPIO.HIGH)
+        led3Button["text"]="Turn LED Off"
+        
+
+
+led1Button=Button(win,text="Turn Light Blue LED on",font=myFont,command=ledToggle,bg='bisque2',height=2,width=20)
+led2Button=Button(win,text="Turn red LED on",font=myFont,command=led2Toggle,bg='bisque2',height=2,width=20)
+led3Button=Button(win,text="Turn Dark Blue LED on",font=myFont,command=led3Toggle,bg='bisque2',height=2,width=20)
+
+led1Button.grid(row=0,column=1)
+led2Button.grid(row=3,column=1)
+led3Button.grid(row=5,column=1)
+
+
+
+mainloop()
+
